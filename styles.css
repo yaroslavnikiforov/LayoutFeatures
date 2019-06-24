@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.mousemove-parallax {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mousemove-parallax__bg {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  bottom: -50px;
+  left: -50px;
+}
+
+.mousemove-parallax .mousemove-parallax__layer {
+  position: absolute;
+  max-width: 100%;
+}
+
+.mousemove-parallax__bg .mousemove-parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mousemove-parallax__layer--girl {
+  bottom: -40px;
+}

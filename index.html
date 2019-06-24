@@ -6,6 +6,50 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>sayonara</h1>
+    <section class="mousemove-parallax">
+      <div class="mousemove-parallax__bg">
+        <img
+          src="images/mousemove-parallax/background.jpg"
+          class="mousemove-parallax__layer"
+          alt="Image"
+          data-speed="-2"
+        />
+      </div>
+      <img
+        src="images/mousemove-parallax/text1.png"
+        class="mousemove-parallax__layer"
+        alt="Image"
+        data-speed="-4"
+      />
+      <img
+        src="images/mousemove-parallax/text2.png"
+        class="mousemove-parallax__layer"
+        alt="Image"
+        data-speed="4"
+      />
+      <img
+        src="images/mousemove-parallax/girl.png"
+        class="mousemove-parallax__layer mousemove-parallax__layer--girl"
+        alt="Image"
+        data-speed="2"
+      />
+    </section>
+
+    <script>
+      document.addEventListener("mousemove", parallax);
+
+      function parallax(e) {
+        this.querySelectorAll('.mousemove-parallax__layer').forEach(layer => {
+          const speed = layer.getAttribute('data-speed')
+          const x = (window.innerWidth - e.pageX * speed) / 100
+          const y = (window.innerWidth - e.pageY * speed) / 100
+
+          layer.style.transform = `
+          translateX(${x}px)
+          translateY(${y}px)
+          `
+        })
+      }
+    </script>
   </body>
 </html>
