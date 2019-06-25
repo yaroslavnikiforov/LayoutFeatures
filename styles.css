@@ -33,5 +33,7 @@ body {
 }
 
 .mousemove-parallax__layer--girl {
-  bottom: -40px;
+  bottom: -20px;
+  height: 100vh;
+  object-fit: cover;
 }
