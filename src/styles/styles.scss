@@ -185,17 +185,17 @@ body {
 }
 
 .clip-path-slider__circle--one {
-  background-image: url("images/clip-path-slider/image1.jpg");
+  background-image: url("../images/clip-path-slider/1.jpg");
   clip-path: circle(100px at 25% center);
 }
 
 .clip-path-slider__circle--two {
-  background-image: url("images/clip-path-slider/image2.jpg");
+  background-image: url("../images/clip-path-slider/2.jpg");
   clip-path: circle(100px at center);
 }
 
 .clip-path-slider__circle--three {
-  background-image: url("images/clip-path-slider/image3.jpg");
+  background-image: url("../images/clip-path-slider/3.jpg");
   clip-path: circle(100px at 75% center);
 }
 

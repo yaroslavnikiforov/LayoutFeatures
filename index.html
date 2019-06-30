@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <title>Layout Features</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dist/styles/style.min.css" />
   </head>
   <body>
+    <!-- 111111111111111111111111111111111111111111111111111111111111111111 -->
+
     <section class="mousemove-parallax">
       <div class="mousemove-parallax__bg">
         <img
@@ -16,24 +18,26 @@
         />
       </div>
       <img
-        src="images/mousemove-parallax/text1.png"
+        src="dist/images/mousemove-parallax/text1.png"
         class="mousemove-parallax__layer"
         alt="Image"
         data-speed="-4"
       />
       <img
-        src="images/mousemove-parallax/text2.png"
+        src="dist/images/mousemove-parallax/text2.png"
         class="mousemove-parallax__layer"
         alt="Image"
         data-speed="4"
       />
       <img
-        src="images/mousemove-parallax/girl.png"
+        src="dist/images/mousemove-parallax/girl.png"
         class="mousemove-parallax__layer mousemove-parallax__layer--girl"
         alt="Image"
         data-speed="2"
       />
     </section>
+
+    <!-- 222222222222222222222222222222222222222222222222222222222222222222 -->
 
     <section class="shiny-glass-button">
       <a class="shiny-glass-button__link" href="#">
@@ -44,6 +48,8 @@
         Button
       </a>
     </section>
+
+    <!-- 333333333333333333333333333333333333333333333333333333333333333333 -->
 
     <section class="clip-path-slider">
       <div class="clip-path-slider__circle clip-path-slider__circle--one">
@@ -81,22 +87,6 @@
       </div>
     </section>
 
-    <script>
-      const mousemoveParallax = document.querySelector(".mousemove-parallax");
-      mousemoveParallax.addEventListener("mousemove", parallax);
-
-      function parallax(e) {
-        this.querySelectorAll(".mousemove-parallax__layer").forEach(layer => {
-          const speed = layer.getAttribute("data-speed");
-          const x = (window.innerWidth - e.pageX * speed) / 100;
-          const y = (window.innerWidth - e.pageY * speed) / 100;
-
-          layer.style.transform = `
-          translateX(${x}px)
-          translateY(${y}px)
-          `;
-        });
-      }
-    </script>
+    <script src="dist/scripts/script.min.js"></script>
   </body>
 </html>
