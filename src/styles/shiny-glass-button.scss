@@ -1,0 +1,118 @@
+.shiny-glass-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    -30deg,
+    #1ec4e9 0%,
+    #673ab7 50%,
+    #262626 50%,
+    #607d8b 100%
+  );
+
+  &__link {
+    position: relative;
+    padding: 25px 50px;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 2em;
+    font-family: sans-serif;
+    letter-spacing: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: 0.5s;
+      transition-delay: 0.5s;
+    }
+
+    &:hover {
+      &:after {
+        left: 100%;
+      }
+
+      & span:nth-child(1) {
+        width: 100%;
+        transform: translateX(100%);
+      }
+
+      & span:nth-child(2) {
+        height: 100%;
+        transform: translateY(100%);
+      }
+
+      & span:nth-child(3) {
+        width: 100%;
+        transform: translateX(-100%);
+      }
+
+      & span:nth-child(4) {
+        height: 100%;
+        transform: translateY(-100%);
+      }
+    }
+
+    & span {
+      position: absolute;
+      display: block;
+      transition: 0.5s ease;
+
+      &:nth-child(1) {
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #ffffff;
+      }
+
+      &:nth-child(2) {
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 0;
+        background: #ffffff;
+      }
+
+      &:nth-child(3) {
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 1px;
+        background: #ffffff;
+      }
+
+      &:nth-child(4) {
+        bottom: 0;
+        right: 0;
+        width: 1px;
+        height: 0;
+        background: #ffffff;
+      }
+    }
+  }
+}
