@@ -1,35 +1,26 @@
-"use strict";
-
 const gulp = require("gulp");
 const sass = require("gulp-sass");
-const browserSync = require("browser-sync").create();
-const js_min = require("gulp-js-minify");
-const clean = require("gulp-clean");
-const concat = require("gulp-concat");
-const image_min = require("gulp-imagemin");
+const minify = require("gulp-minify");
+const imagemin = require("gulp-imagemin");
 const rename = require("gulp-rename");
-const gulp_sync = require("gulp-sync")(gulp);
+const concat = require("gulp-concat");
+const clean = require("gulp-clean");
+const browserSync = require("browser-sync").create();
 
-gulp.task("dev", function() {
+function devWatch() {
     browserSync.init({
         server: "./"
     });
 
-    gulp.watch("./src/styles/*.scss", ["sass"]);
-    gulp.watch("./src/scripts/*.js", ["js"]);
-    gulp.watch("./src/images/**", gulp_sync.sync(["clean-img", "images"]));
+    gulp.watch("src/styles/*.scss", convertScss);
+    gulp.watch("./src/scripts/*.js", compressJs);
+    gulp.watch("./src/images/**", gulp.series(cleanImages, compressImages));
     gulp.watch("./index.html").on("change", browserSync.reload);
-});
+}
 
-gulp.task("build", gulp_sync.sync(["clean-dist", "sass", "js", "images"]));
-
-gulp.task("clean-dist", function() {
-    return gulp.src("./dist", { read: false }).pipe(clean());
-});
-
-gulp.task("sass", function() {
+function convertScss() {
     return gulp
-        .src("./src/styles/*.scss")
+        .src("src/styles/*.scss")
         .pipe(concat("style.scss"))
         .pipe(
             sass({
@@ -37,32 +28,55 @@ gulp.task("sass", function() {
                 errorLogToConsole: true
             })
         )
-        .on("error", console.error.bind(console))
+        .on("error", sass.logError)
         .pipe(rename({ suffix: ".min" }))
         .pipe(gulp.dest("./dist/styles"))
         .pipe(browserSync.stream());
-});
+}
 
-gulp.task("js", function() {
+function compressJs() {
     return gulp
         .src("./src/scripts/*.js")
         .pipe(concat("script.js"))
-        .pipe(js_min())
-        .pipe(rename({ suffix: ".min" }))
+        .pipe(
+            minify({
+                noSource: true,
+                ext: {
+                    min: ".min.js"
+                }
+            })
+        )
         .pipe(gulp.dest("./dist/scripts"))
         .pipe(browserSync.stream());
-});
+}
 
-gulp.task("clean-img", function() {
-    return gulp.src("./dist/images", { read: false }).pipe(clean());
-});
-
-gulp.task("images", function() {
+function compressImages() {
     return gulp
-        .src("./src/images/**/*")
-        .pipe(image_min())
-        .pipe(gulp.dest("./dist/images"))
+        .src("src/images/**/*")
+        .pipe(imagemin())
+        .pipe(gulp.dest("dist/images"))
         .pipe(browserSync.stream());
-});
+}
 
-gulp.task("default", gulp_sync.sync(["build", "dev"]));
+function cleanDist() {
+    return gulp
+        .src("./dist", { read: false, allowEmpty: true })
+        .pipe(clean())
+        .pipe(browserSync.stream());
+}
+
+function cleanImages() {
+    return gulp
+        .src("./dist/images", { read: false, allowEmpty: true })
+        .pipe(clean())
+        .pipe(browserSync.stream());
+}
+
+exports.clean = cleanDist;
+exports.default = gulp.series(
+    cleanDist,
+    convertScss,
+    compressJs,
+    compressImages,
+    devWatch
+);

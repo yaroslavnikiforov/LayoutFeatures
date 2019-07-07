@@ -10,15 +10,7 @@
     right: -50px;
     bottom: -50px;
     left: -50px;
-
-    &__layer {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    object-fit: cover;
   }
 
   &__layer {
