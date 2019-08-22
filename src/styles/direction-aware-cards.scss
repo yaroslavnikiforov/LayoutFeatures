@@ -1,0 +1,77 @@
+.direction-aware-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    0deg,
+    #0b74cb 0%,
+    #0b74cb 50%,
+    #ffffff 50%,
+    #ffffff 100%
+  );
+
+  * {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  &__container {
+    max-width: 1000px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform-style: preserve-3d;
+
+    &:hover {
+      .direction-aware-cards__card {
+        transform: perspective(500px) rotateY(30deg);
+      }
+    }
+
+    .direction-aware-cards__card:hover {
+      transform: perspective(500px) rotateY(0deg);
+
+      & ~ .direction-aware-cards__card {
+        transform: perspective(500px) rotateY(-30deg);
+      }
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 240px;
+    margin: 0 10px;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+
+  &__title {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 3em;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 50%;
+    background: #2196f3;
+    user-select: none;
+    transition: box-shadow 0.5s;
+
+    &:hover {
+      color: #2196f3;
+      background: #ffffff;
+      box-shadow: 0 0 0 150px #2196f3;
+    }
+  }
+}

@@ -22,7 +22,7 @@
     &:active {
       clip-path: circle(800px at center);
 
-      & .clip-path-slider__content {
+      .clip-path-slider__content {
         opacity: 1;
         transition-delay: 1s;
       }
